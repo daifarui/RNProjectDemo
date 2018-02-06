@@ -6,7 +6,7 @@ import {
   TextInput,
   StyleSheet,
 } from 'react-native';
-
+import SplashScreen from 'react-native-splash-screen'
 
 class First extends Component {
   constructor(props) {
@@ -18,6 +18,12 @@ class First extends Component {
 
   componentWillMount() {
     window.currentRouter = this.props.navigation.state.routeName;
+  }
+
+  componentDidMount() {
+    // do stuff while splash screen is shown
+    // After having done stuff (such as async tasks) hide the splash screen
+    SplashScreen.hide();
   }
 
   render() {

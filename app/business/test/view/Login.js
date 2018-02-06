@@ -5,6 +5,7 @@ import Touchable from '../../../components/common/Touchable'
 
 import {NavigationActions} from '../../../utils'
 import {connect} from 'dva'
+import SplashScreen from "react-native-splash-screen";
 @connect(({test}) => ({test}))
 class Login extends Component {
   static navigationOptions = {
@@ -32,6 +33,14 @@ class Login extends Component {
   onClose = () => {
     this.props.dispatch(NavigationActions.back())
   };
+
+  componentWillMount() {
+    window.currentRouter = this.props.navigation.state.routeName;
+  }
+
+  componentDidMount() {
+    SplashScreen.hide();
+  }
 
   render() {
     const { fetching } = this.props

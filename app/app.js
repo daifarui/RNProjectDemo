@@ -71,7 +71,7 @@ registerModels(app);
 
 app.router(() => <Router/>);
 
-DeviceEventEmitter.addListener('NativeToRNMessage', data => {
+DeviceEventEmitter.addListener('NativeToRNMsg', data => {
 
   if (window.routeList[data.routeName] === undefined) {
     window.dispatch(NavigationActions.reset({
@@ -88,13 +88,6 @@ DeviceEventEmitter.addListener('NativeToRNMessage', data => {
 
 });
 
-DeviceEventEmitter.addListener('NativeMsgToRNMessage', data => {
-  if (data.flag === 'loginOut') {
-    Storage._getStorage();
-    Storage.saveWithTime('salaryLoginState', null);
-  }
-
-});
 
 export default app.start();
 

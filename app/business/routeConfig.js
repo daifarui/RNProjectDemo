@@ -26,8 +26,8 @@ if (android) {
   headStyle.shadowOffset = {width: 0, height: 0}
 }
 window.routeList = {
-  ...First,
   ...Test,
+  ...First,
 };
 
 const rootRouter = StackNavigator(
@@ -50,7 +50,7 @@ const rootRouter = StackNavigator(
         <TouchableOpacity
           style={{width: 40, height: '100%', justifyContent: 'center',}}
           onPress={() => {
-            window.nav.goBack();
+            window.nav.props.navigation.goBack();
           }}
         >
           <Image

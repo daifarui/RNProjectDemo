@@ -67,8 +67,7 @@ const AppNavigator = StackNavigator(
   }
 );
 
-
-
+let lastBackPressed = 0;
 
 @connect(({router}) => ({router}))
 export default class Router extends PureComponent {
@@ -87,14 +86,18 @@ export default class Router extends PureComponent {
   }
 
   backHandle = () => {
-    // let now = new Date().getTime();
-    // if(now - lastBackPressed < 2500) {
-    //   return false;
-    // }
-    // lastBackPressed = now;
-    // ToastAndroid.show('再点击一次退出应用',ToastAndroid.SHORT);
-    // return true;
-    return false;
+    const currentScreen = getCurrentScreen(this.props.router);
+    if(currentScreen === window.currentRouter){
+      let now = new Date().getTime();
+      if(now - lastBackPressed < 2500) {
+        return false;
+      }
+      lastBackPressed = now;
+      window.toast.show('再点击一次退出应用');
+      return true;
+    }else {
+      return false;
+    }
   };
 
 

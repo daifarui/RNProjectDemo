@@ -6,10 +6,11 @@ import login from './Login'
 
 const namespace = "test";
 const RouteConfig = createRoute({
+  login: {screen: login},
   account: {screen: account},
   detail: {screen: detail},
   home: {screen: home},
-  login: {screen: login},
+
 }, namespace);
 
 export default RouteConfig
