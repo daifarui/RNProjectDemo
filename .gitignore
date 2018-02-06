@@ -1,0 +1,15 @@
+# OSX
+# Xcode
+#
+build/
+
+.idea
+.gradle
+local.properties
+*.iml
+
+__tests__/
+node_modules/
+yarn.lock
+.gitignore
+
