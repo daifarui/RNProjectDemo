@@ -1,4 +1,11 @@
 /**
+ * Created by dfr
+ */
+
+
+'use strict';
+
+/**
  * 字符串是否包含表情 方法
  * @param substring
  * @returns {boolean}
