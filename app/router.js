@@ -1,5 +1,5 @@
 import React, {PureComponent} from 'react'
-import {BackHandler, Animated, Easing, DeviceEventEmitter, View} from 'react-native'
+import {BackHandler, Animated, Easing, DeviceEventEmitter, View, StatusBar} from 'react-native'
 import {
   StackNavigator,
   TabNavigator,
@@ -8,6 +8,10 @@ import {
   NavigationActions,
 } from 'react-navigation'
 import {connect} from 'dva'
+import {
+  createReduxBoundAddListener,
+  createReactNavigationReduxMiddleware,
+} from 'react-navigation-redux-helpers'
 
 import rootRouter from './business/routeConfig'
 import Toast from './components/common/toast';
@@ -17,11 +21,19 @@ function getCurrentScreen(navigationState) {
     return null
   }
   const route = navigationState.routes[navigationState.index];
+  //{index: 0, routes: Array(1), routeName: "Main", key: "Init-id-1519798611353-1"}
+  //{routeName: "login/login", key: "Init-id-1519798611353-0"}
   if (route.routes) {
     return getCurrentScreen(route)
   }
   return route.routeName
 }
+
+export const routerMiddleware = createReactNavigationReduxMiddleware(
+  'root',
+  state => state.router
+);
+const addListener = createReduxBoundAddListener('root');
 
 const AppNavigator = StackNavigator(
   {
@@ -73,12 +85,13 @@ let lastBackPressed = 0;
 export default class Router extends PureComponent {
 
   constructor(props, context) {
-    super(props, context)
+    super(props, context);
+    this.state = {}
   }
 
   componentWillMount() {
-
     BackHandler.addEventListener('hardwareBackPress', this.backHandle)
+
   }
 
   componentWillUnmount() {
@@ -87,15 +100,15 @@ export default class Router extends PureComponent {
 
   backHandle = () => {
     const currentScreen = getCurrentScreen(this.props.router);
-    if(currentScreen === window.currentRouter){
+    if (currentScreen === window.currentRouter) {
       let now = new Date().getTime();
-      if(now - lastBackPressed < 2500) {
+      if (now - lastBackPressed < 2500) {
         return false;
       }
       lastBackPressed = now;
       window.toast.show('再点击一次退出应用');
       return true;
-    }else {
+    } else {
       return false;
     }
   };
@@ -104,8 +117,15 @@ export default class Router extends PureComponent {
   render() {
     const {dispatch, router} = this.props;
     window.dispatch = dispatch;
-    const navigation = addNavigationHelpers({dispatch, state: router});
+    const navigation = addNavigationHelpers({
+      dispatch, state: router, addListener
+    });
     return <View style={{flex: 1, width: "100%"}}>
+      <StatusBar
+        hidden={false}//translucent={true}
+        backgroundColor={this.props.router.statusColor}
+        barStyle="light-content"
+      />
       <AppNavigator navigation={navigation} ref={(c) => window.nav = c}/>
       <Toast ref={(c) => window.toast = c}/>
     </View>

@@ -18,7 +18,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     borderColor: '#037aff',
-    borderWidth: StyleSheet.hairlineWidth,
+    borderWidth: 1,
   },
   text: {
     fontSize: 16,

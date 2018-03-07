@@ -8,14 +8,15 @@ import {Dimensions} from 'react-native';
 // device width/height
 const deviceWidth = Dimensions.get('window').width;
 const deviceHeight = Dimensions.get('window').height;
+console.log('w:' + deviceWidth + '__' + 'h:' + deviceHeight);
 // design width/height
-const uiHeight = 592;
-const uiWidth = 420;
+const uiHeight = 731;
+const uiWidth = 411;
 
-export default function convertH(uiElement) {
-  return uiElement *  deviceHeight / uiHeight;
+export function convertH(uiElement) {
+  return uiElement * deviceHeight / uiHeight;
 }
 
-export default function convertW(uiElement) {
-  return uiElement *  deviceWidth / uiWidth;
+export function convertW(uiElement) {
+  return uiElement * deviceWidth / uiWidth;
 }

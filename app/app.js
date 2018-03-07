@@ -18,7 +18,7 @@ import dva from "dva/mobile";
 
 
 import {registerModels} from "./models";
-import Router from "./router";
+import Router, { routerMiddleware } from './router'
 
 window.fileUrl = 'www.davis.com';
 alert = function (msg, fn) {
@@ -31,7 +31,14 @@ alert = function (msg, fn) {
       }
     },
   ])
-}
+};
+
+Storage._getStorage();
+window.currentUser = Storage.load('currentUser', (result) => {
+  window.currentUser = result;
+});
+
+console.log(window.currentUser);
 
 // console.log=function(){return;};
 
@@ -46,7 +53,7 @@ Date.prototype.format = function (format) {
     's+': this.getSeconds(),
     'q+': Math.floor((this.getMonth() + 3) / 3),
     S: this.getMilliseconds(),
-  }
+  };
   if (/(y+)/.test(format)) {
     format = format.replace(RegExp.$1, `${this.getFullYear()}`.substr(4 - RegExp.$1.length))
   }
@@ -56,12 +63,13 @@ Date.prototype.format = function (format) {
     }
   }
   return format
-}
+};
 
 
 const app = dva({
   initialState: {},
   // extraEnhancers: [autoRehydrate()],
+  onAction: [routerMiddleware],
   onError(e) {
     console.log("onError", e);
   }

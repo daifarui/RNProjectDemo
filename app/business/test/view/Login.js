@@ -9,7 +9,7 @@ import SplashScreen from "react-native-splash-screen";
 @connect(({test}) => ({test}))
 class Login extends Component {
   static navigationOptions = {
-    title: 'Login',
+    headerTitle: 'Login',
   };
 
   onLogin = () => {

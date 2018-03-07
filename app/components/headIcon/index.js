@@ -150,7 +150,7 @@ export default class HeadIcon extends React.Component {
           <Text style={{fontSize: this.state.size / 3, color: '#fff', backgroundColor: 'transparent'}}>{name}</Text>
         </View>)
       }
-    } else {
+    } else if (this.state.telNum !== undefined && this.state.telNum.length > 0) {
       icon = (<View style={{
         width: this.state.size,
         height: this.state.size,
@@ -161,14 +161,29 @@ export default class HeadIcon extends React.Component {
       }}>
         <Text style={{fontSize: this.state.size / 3, color: '#fff', backgroundColor: 'transparent'}}>{name}</Text>
       </View>)
+    } else {
+      icon = (<View style={{width: this.state.size, height: this.state.size, borderRadius: this.state.size / 2,}}>
+          <Image
+            style={{
+              width: this.state.size,
+              height: this.state.size,
+              borderRadius: this.state.size / 2,
+              resizeMode: Image.resizeMode.center
+            }}
+            source={require('../../images/fishlogo.png')}
+          />
+        </View>
+      )
     }
+    //阴影层
     let view = <View style={{
       backgroundColor: gray,
       width: this.state.size,
       position: 'absolute',
       height: this.state.size,
       borderRadius: this.state.size / 2,
-    }}/>
+    }}/>;
+
     icon = <View>{icon}{view}</View>
     return icon
   }

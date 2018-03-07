@@ -28,12 +28,12 @@ const fetch = (options) => {
       return axios(options)
   }
 };
-
+window.baseUrl ='http://112.29.169.54:8081/';
 export default async function request(options) {
   options.timeout = 30000;
   console.log(options.data);
 
-  options.url = window.baseUrl + options.url;
+  options.url = window.baseUrl + options.url + "?requestId=" + new Date().getTime() + options.data.phoneImei;
 
   options.header = {
     'Content type': 'application/json; charset=UTF-8',
