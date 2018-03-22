@@ -34,14 +34,7 @@ class Register extends Component {
 
 
   async register() {
-    this.props.dispatch({
-      type:'',
-      data:{
-        body:{},
 
-      }
-
-    })
 
   }
 

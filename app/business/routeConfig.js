@@ -9,6 +9,7 @@ import React, {Component} from 'react'
 import First from './first'
 import Test from './test/view'
 import Login from './login/view'
+import Home from './home/view'
 
 
 let ios = Platform.OS === 'ios';
@@ -28,8 +29,10 @@ if (android) {
 }
 window.routeList = {
   ...Login,
-  ...Test,
   ...First,
+  ...Home,
+  ...Test,
+
 };
 
 const rootRouter = StackNavigator(

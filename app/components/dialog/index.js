@@ -84,7 +84,7 @@ export default class Dialog extends React.Component {
       visible={this.state.show}>
       <View style={{
         width: '100%',
-        backgroundColor: 'rgba(0, 0, 0, 0.0)',
+        backgroundColor: 'rgba(0, 0, 0, 0.5)',
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center'

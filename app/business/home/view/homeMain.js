@@ -36,7 +36,7 @@ class Login extends Component {
     header: null,
   };
 
-  async onLogin() {
+  onLogin = () => {
     this.props.dispatch({
       type: 'login/login',
       payload: {
@@ -175,7 +175,7 @@ class Login extends Component {
           </View>
 
           {/*<Dialog title='温馨提示' content={'是否要放弃编辑？若放弃，已输入内容不会被保存。'}*/}
-          {/*ref='dialog'/>*/}
+                  {/*ref='dialog'/>*/}
         </View>
       </TouchableWithoutFeedback>
     )
